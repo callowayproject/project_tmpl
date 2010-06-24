@@ -50,14 +50,14 @@ except ImportError:
 try:    
     from local_settings import MEDIA_ROOT
 except ImportError:
-    MEDIA_ROOT = os.path.join(MEDIA_ROOT_PREFIX, 'ugc')
+    MEDIA_ROOT = os.path.join(MEDIA_ROOT_PREFIX, 'uploads')
 try:
     from local_settings import STATIC_ROOT
 except ImportError:
     STATIC_ROOT = os.path.join(MEDIA_ROOT_PREFIX, 'static')
     
 
-MEDIA_URL = '%sugc/' % MEDIA_URL_PREFIX
+MEDIA_URL = '%suploads/' % MEDIA_URL_PREFIX
 STATIC_URL = "%sstatic/" % MEDIA_URL_PREFIX
 STATIC_MEDIA_APP_MEDIA_PATH = STATIC_ROOT
 STATIC_MEDIA_COPY_PATHS = (
@@ -100,7 +100,6 @@ ADMIN_TOOLS_THEMING_CSS = 'admin/css/theming.css'
 # ADMIN_TOOLS_MENU = 'menu.CustomMenu'
 
 TINYMCE_JS_URL = '%sjs/tiny_mce/tiny_mce.js' % STATIC_URL
-
 TINYMCE_JS_ROOT = os.path.join(STATIC_ROOT, 'js/tiny_mce')
 
 try:
