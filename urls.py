@@ -5,7 +5,7 @@ from django.conf import settings
 
 admin.autodiscover()
 
-handler500 = 'calloway.django_ext.views.custom_server_error'
+handler500 = 'django_ext.views.custom_server_error'
 
 sitemaps = {
 }

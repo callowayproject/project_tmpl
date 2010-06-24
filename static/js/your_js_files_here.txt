@@ -1,0 +1,1 @@
+Put any javascript files for your web site in this directory.

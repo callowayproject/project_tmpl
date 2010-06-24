@@ -20,13 +20,13 @@ TEMPLATE_DEBUG = DEBUG
 from calloway.settings import *
 
 ADMINS = (
-    ('%(NAME)s', '%(EMAIL_ADDRESS)s'),
+    ('$$$$NAME$$$$', '$$$$EMAIL_ADDRESS$$$$'),
 )
 MANAGERS = ADMINS
 DEFAULT_FROM_EMAIL='$$$$EMAIL_ADDRESS$$$$'
 SERVER_EMAIL='$$$$EMAIL_ADDRESS$$$$'
 
-SECRET_KEY = '%(SECRET_KEY)s'
+SECRET_KEY = '$$$$SECRET_KEY$$$$'
 
 DATABASE_ENGINE = 'sqlite3'    # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
 DATABASE_NAME = 'dev.db'       # Or path to database file if using sqlite3.
@@ -42,22 +42,22 @@ USE_I18N = True
 try:
     from local_settings import MEDIA_URL_PREFIX
 except ImportError:
-    MEDIA_URL_PREFIX = "http://media.washtimes.com/"
+    MEDIA_URL_PREFIX = "/media/"
 try:
     from local_settings import MEDIA_ROOT_PREFIX
 except ImportError:
-    MEDIA_ROOT_PREFIX = '/nfs-media/twt/'
-try:
+    MEDIA_ROOT_PREFIX = os.path.join(PROJECT_ROOT, 'media')
+try:    
     from local_settings import MEDIA_ROOT
 except ImportError:
-    MEDIA_ROOT = os.path.join(MEDIA_ROOT_PREFIX, 'ugc')
+    MEDIA_ROOT = os.path.join(MEDIA_ROOT_PREFIX, 'uploads')
 try:
     from local_settings import STATIC_ROOT
 except ImportError:
     STATIC_ROOT = os.path.join(MEDIA_ROOT_PREFIX, 'static')
     
 
-MEDIA_URL = '%sugc/' % MEDIA_URL_PREFIX
+MEDIA_URL = '%suploads/' % MEDIA_URL_PREFIX
 STATIC_URL = "%sstatic/" % MEDIA_URL_PREFIX
 STATIC_MEDIA_APP_MEDIA_PATH = STATIC_ROOT
 STATIC_MEDIA_COPY_PATHS = (
@@ -72,8 +72,6 @@ MMEDIA_IMAGE_UPLOAD_TO = 'image/%Y/%m/%d'
 
 AUTH_PROFILE_MODULE = ''
 
-PUBLICATION_NAME = 'The Effington Times'
-
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
@@ -81,7 +79,7 @@ TEMPLATE_DIRS = (
     os.path.join(PROJECT_ROOT, 'templates'),
 ) + CALLOWAY_TEMPLATE_DIRS
 
-CACHE_BACKEND = 'versionedcache.backend://localhost:11211/'
+CACHE_BACKEND = 'memcached://localhost:11211/'
 
 INSTALLED_APPS = APPS_CORE + \
     APPS_ADMIN + \
@@ -99,9 +97,9 @@ INSTALLED_APPS = APPS_CORE + \
     APPS_TINYMCE 
 
 ADMIN_TOOLS_THEMING_CSS = 'admin/css/theming.css'
+# ADMIN_TOOLS_MENU = 'menu.CustomMenu'
 
 TINYMCE_JS_URL = '%sjs/tiny_mce/tiny_mce.js' % STATIC_URL
-
 TINYMCE_JS_ROOT = os.path.join(STATIC_ROOT, 'js/tiny_mce')
 
 try:
