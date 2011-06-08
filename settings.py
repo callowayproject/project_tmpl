@@ -28,12 +28,16 @@ SERVER_EMAIL='$$$$EMAIL_ADDRESS$$$$'
 
 SECRET_KEY = '$$$$SECRET_KEY$$$$'
 
-DATABASE_ENGINE = 'sqlite3'    # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-DATABASE_NAME = 'dev.db'       # Or path to database file if using sqlite3.
-DATABASE_USER = ''             # Not used with sqlite3.
-DATABASE_PASSWORD = ''         # Not used with sqlite3.
-DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
-DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3', 
+        'NAME': 'dev.db',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
+    }
+}
 
 TIME_ZONE = 'America/New_York'
 LANGUAGE_CODE = 'en-us'
@@ -74,7 +78,8 @@ TEMPLATE_DIRS = (
 
 CACHE_BACKEND = 'memcached://localhost:11211/'
 
-INSTALLED_APPS = APPS_CORE + \
+INSTALLED_APPS = APPS_DJANGO_BASE + \
+    APPS_MESSAGES + \
     APPS_ADMIN + \
     APPS_STAFF + \
     APPS_REVERSION + \
