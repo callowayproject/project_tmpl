@@ -59,13 +59,6 @@ except ImportError:
 
 MEDIA_URL = '%suploads/' % MEDIA_URL_PREFIX
 STATIC_URL = "%sstatic/" % MEDIA_URL_PREFIX
-STATIC_MEDIA_APP_MEDIA_PATH = STATIC_ROOT
-STATIC_MEDIA_COPY_PATHS = (
-    {'from': os.path.join(CALLOWAY_ROOT, 'media'), 'to': STATIC_ROOT},
-    {'from': 'static', 'to': STATIC_ROOT},
-)
-STATIC_MEDIA_COMPRESS_CSS = not DEBUG
-STATIC_MEDIA_COMPRESS_JS = not DEBUG
 
 MMEDIA_DEFAULT_STORAGE = 'media_storage.MediaStorage'
 MMEDIA_IMAGE_UPLOAD_TO = 'image/%Y/%m/%d'
@@ -94,12 +87,15 @@ INSTALLED_APPS = APPS_CORE + \
     APPS_MEDIA + \
     APPS_UTILS + \
     APPS_REGISTRATION + \
-    APPS_TINYMCE 
+    APPS_TINYMCE + (
+        'staticfiles',
+        'calloway',
+    )
 
-ADMIN_TOOLS_THEMING_CSS = 'admin/css/theming.css'
+ADMIN_TOOLS_THEMING_CSS = 'calloway/admin/css/theming.css'
 # ADMIN_TOOLS_MENU = 'menu.CustomMenu'
 
-TINYMCE_JS_URL = '%sjs/tiny_mce/tiny_mce.js' % STATIC_URL
+TINYMCE_JS_URL = '%scalloway/js/tiny_mce/tiny_mce.js' % STATIC_URL
 TINYMCE_JS_ROOT = os.path.join(STATIC_ROOT, 'js/tiny_mce')
 
 try:
